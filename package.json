@@ -1,0 +1,50 @@
+{
+  "name": "WebWhatsappView",
+  "version": "0.0.2",
+  "homepage": "nenhuma",
+  "author": {
+    "name": "Fernando Souza",
+    "email": "fernando.souza@doxacode.com.br"
+  },
+  "license": "MIT",
+  "scripts": {
+    "dev": "electron-webpack dev > /dev/null &",
+    "compile": "electron-webpack",
+    "dist": "yarn compile && electron-builder",
+    "dist:dir": "yarn dist --dir -c.compression=store -c.mac.identity=null",
+    "pack": "electron-builder --dir"
+  },
+  "build": {
+    "productName": "WebWhatsappView",
+    "appId": "br.com.doxacode.webwhatsapp.view",
+    "win": {
+      "target": [
+        "msi"
+      ]
+    },
+    "linux": {
+      "target": [
+        "deb"
+      ],
+      "category": "Network",
+      "icon": "src/assets/icon.png"
+    },
+    "mac": {
+      "target": "dmg"
+    },
+    "directories": {
+      "buildResources": "src/assets",
+      "output": "release"
+    }
+  },
+  "dependencies": {
+    "source-map-support": "^0.5.19"
+  },
+  "devDependencies": {
+    "copy-webpack-plugin": "^8.1.1",
+    "electron": "^2",
+    "electron-builder": "^22.10.5",
+    "electron-webpack": "^2.8.2",
+    "webpack": "^4.x"
+  }
+}
