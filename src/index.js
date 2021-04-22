@@ -1,6 +1,6 @@
-const eletron = require('electron')
+const electron = require('electron')
 const path = require('path')
-const { app, Tray, BrowserWindow, nativeImage, Menu, globalShortcut } = eletron
+const { app, Tray, BrowserWindow, nativeImage, Menu, globalShortcut } = electron
 let tray = null
 let mainWindow
 
@@ -8,7 +8,7 @@ function createMainWindow() {
   if (mainWindow) {
     return mainWindow.hide()
   }
-  const { width: widthScreen } = eletron.screen.getPrimaryDisplay().workAreaSize
+  const { width: widthScreen, height: heightScreen } = electron.screen.getPrimaryDisplay().workAreaSize
   const size = {
     width: 1000,
     height: 600
@@ -27,13 +27,17 @@ function createMainWindow() {
     webPreferences: {
       preload: path.join(__dirname, 'preload.js')
     },
-    frame: false,
     ...size,
-    x: (widthScreen * 2) - size.width - 40,
-    y: 0
+    x: widthScreen / 2 - size.width / 2,
+    y: heightScreen / 2 - size.height / 2
   })
 
   window.on('blur', () => {
+    window.hide()
+  })
+
+  window.on('close', e => {
+    e.preventDefault()
     window.hide()
   })
 
