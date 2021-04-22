@@ -9,22 +9,19 @@ install the linux dependencies needed to run the application
 $ sudo apt-get install libgconf-2-4 -y
 ```
 ***
-#### YARN
 install application dependencies
 ```javascript
-$ yarn
+$ yarn || npm install
 ```
-start the process
+build aplication
 ```javascript
-$ yarn dev
+$ yarn make || npm run make
 ```
-***
-#### NPM
-install application dependencies
-```javascript
-$ npm install
+go to the folder where the application was built
+```shell
+$ cd out/make/deb/x64/
 ```
-start the process
-```javascript
-$ npm run dev
+install the application on your linux
+```shell
+$ sudo dpkg -i <generated package name>
 ```
